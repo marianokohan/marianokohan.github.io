@@ -40,6 +40,8 @@
 	//var defaultPosition = [-34.60186, -58.39852]; //casa CABA
 	var defaultPosition = [-30.857821, -64.532875]; //Capilla del Monte (Dharma)
 	
+	var currentPosition = defaultPosition;
+	
 	var radiuses = [
 				{ name: 'far',
 				color: '#f6f470',
@@ -68,12 +70,12 @@
 	function onLocationFound(e) {
 		var radius = e.accuracy / 2;
 		locate(e.latlng, "You are within " + radius + " meters from this point", radius);
-		showRadiuses();
+		currentPosition = e.latlng;
 	}
 
 	function onLocationError(e) {
 		alert(e.message);
-		locate(defaultPosition, "Default location");
+		locate(currentPosition, "Default location");
 	}
 
 	function locate(position, label, locationRadius) {
@@ -94,7 +96,7 @@
 	
 	function showRadiuses() {
 		radiuses.forEach(function (radius) {
-			L.circle(defaultPosition, radius).addTo(map);
+			L.circle(currentPosition, radius).addTo(map);
 		});
 	}
 	
