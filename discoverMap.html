@@ -68,6 +68,7 @@
 	function onLocationFound(e) {
 		var radius = e.accuracy / 2;
 		locate(e.latlng, "You are within " + radius + " meters from this point", radius);
+		showRadiuses();
 	}
 
 	function onLocationError(e) {
